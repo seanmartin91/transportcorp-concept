@@ -354,6 +354,20 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   if (ticker) ticker.style.animation = 'none';
 }
 
+// ---- LAZY LOAD FLATBED VIDEO ----
+// Don't load it until it's near the viewport
+const flatbedVideo = document.querySelector('.img-divider__video');
+if (flatbedVideo) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      flatbedVideo.load();
+      flatbedVideo.play().catch(() => {});
+      videoObserver.disconnect();
+    }
+  }, { rootMargin: '200px' });
+  videoObserver.observe(flatbedVideo);
+}
+
 // ---- VIDEO FALLBACK ----
 // If video fails to load (slow connection), show the poster image gracefully
 const video = document.querySelector('.hero__video');

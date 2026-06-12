@@ -10,6 +10,9 @@
   <!-- Fonts -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
 
+  <!-- Preload hero poster so it shows instantly -->  
+  <link rel="preload" href="assets/hero-truck.webp" as="image" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -64,7 +67,8 @@
         <video
           class="hero__video"
           autoplay muted loop playsinline
-          poster="assets/hero-truck.png"
+          preload="metadata"
+          poster="assets/hero-truck.webp"
           aria-hidden="true"
         >
           <source src="assets/hero-truck-video.mp4" type="video/mp4" />
@@ -199,7 +203,8 @@
       <video
         class="img-divider__video"
         autoplay muted loop playsinline
-        poster="assets/flatbed-truck.png"
+        preload="none"
+        poster="assets/flatbed-truck.webp"
         aria-hidden="true"
       >
         <source src="assets/flatbed-truck-video.mp4" type="video/mp4" />
