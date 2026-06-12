@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TransportCorp — We Move Canada</title>
+  <meta name="description" content="Southern Ontario's largest privately held trucking company. 50+ years of moving freight across North America. Flatbed, bulk, tank, van, cross-border." />
+  <meta property="og:title" content="TransportCorp — We Move Canada" />
+
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="TransportCorp">
+        <!-- TC Logo mark -->
+        <svg class="nav__logomark" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="3" fill="#C8102E"/>
+          <path d="M5 29 L5 16 L15 11 L25 16 L35 11 L35 29" stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+          <rect x="21" y="22" width="11" height="7" rx="1" fill="white"/>
+          <circle cx="12" cy="30" r="3" fill="white"/>
+          <circle cx="28" cy="30" r="3" fill="white"/>
+        </svg>
+        <span class="nav__wordmark">TRANSPORT<strong>CORP</strong></span>
+      </a>
+
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#divisions">Divisions</a>
+        <a href="#contact" class="nav__cta">Get a Quote →</a>
+      </nav>
+
+      <button class="nav__burger" aria-label="Open menu" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#divisions">Divisions</a>
+      <a href="#contact">Get a Quote</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+
+      <!-- VIDEO BG -->
+      <div class="hero__media">
+        <!-- CSS Rain Canvas -->
+        <canvas class="hero__rain" id="rainCanvas" aria-hidden="true"></canvas>
+        <video
+          class="hero__video"
+          autoplay muted loop playsinline
+          poster="assets/hero-truck.png"
+          aria-hidden="true"
+        >
+          <source src="assets/hero-truck-video.mp4" type="video/mp4" />
+        </video>
+        <!-- Heavy overlay -->
+        <div class="hero__overlay"></div>
+        <!-- Bottom gradient fade -->
+        <div class="hero__fade-bottom"></div>
+      </div>
+
+      <!-- Noise texture -->
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <div class="hero__content">
+
+        <!-- Top eyebrow -->
+        <div class="hero__eyebrow fade-in">
+          <span class="hero__dot"></span>
+          <span>Est. 1970 &nbsp;·&nbsp; Hamilton, Ontario &nbsp;·&nbsp; 50+ Years Running</span>
+        </div>
+
+        <!-- BIG HEADLINE -->
+        <h1 class="hero__headline fade-in" style="--delay:0.1s">
+          <span class="hero__h-line">WE MOVE</span>
+          <span class="hero__h-line hero__h-accent">CANADA.</span>
+        </h1>
+
+        <p class="hero__sub fade-in" style="--delay:0.25s">
+          Southern Ontario's largest privately held carrier.<br/>
+          Rain. Snow. Night. We don't stop.
+        </p>
+
+        <div class="hero__actions fade-in" style="--delay:0.35s">
+          <a href="#contact" class="btn btn--red">Get a Quote</a>
+          <a href="#services" class="btn btn--outline">Our Services</a>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="hero__stats fade-in" style="--delay:0.5s">
+          <div class="hstat">
+            <span class="hstat__n">50<sup>+</sup></span>
+            <span class="hstat__l">Years Operating</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__n">7</span>
+            <span class="hstat__l">Divisions</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__n">24<span class="hstat__slash">/</span>7</span>
+            <span class="hstat__l">Dispatch</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__n">1<sup>st</sup></span>
+            <span class="hstat__l">S.Ontario Carrier</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll arrow -->
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </section>
+
+    <!-- ===== TICKER ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Bulk Hauling</span><span class="ticker__sep">///</span>
+        <span>Flatbed</span><span class="ticker__sep">///</span>
+        <span>Tank</span><span class="ticker__sep">///</span>
+        <span>Van</span><span class="ticker__sep">///</span>
+        <span>Cross-Border</span><span class="ticker__sep">///</span>
+        <span>LTL</span><span class="ticker__sep">///</span>
+        <span>Warehousing</span><span class="ticker__sep">///</span>
+        <span>Brokerage</span><span class="ticker__sep">///</span>
+        <span>Supply Chain</span><span class="ticker__sep">///</span>
+        <span>JIT Logistics</span><span class="ticker__sep">///</span>
+        <span>Import / Export</span><span class="ticker__sep">///</span>
+        <!-- dupe for seamless loop -->
+        <span>Bulk Hauling</span><span class="ticker__sep">///</span>
+        <span>Flatbed</span><span class="ticker__sep">///</span>
+        <span>Tank</span><span class="ticker__sep">///</span>
+        <span>Van</span><span class="ticker__sep">///</span>
+        <span>Cross-Border</span><span class="ticker__sep">///</span>
+        <span>LTL</span><span class="ticker__sep">///</span>
+        <span>Warehousing</span><span class="ticker__sep">///</span>
+        <span>Brokerage</span><span class="ticker__sep">///</span>
+        <span>Supply Chain</span><span class="ticker__sep">///</span>
+        <span>JIT Logistics</span><span class="ticker__sep">///</span>
+        <span>Import / Export</span><span class="ticker__sep">///</span>
+      </div>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__left reveal-up">
+            <span class="tag">Family Owned · 3 Generations</span>
+            <h2 class="section-title">Built in Hamilton.<br/>Built to last.</h2>
+            <p>TransportCorp started with one truck and a handshake. Today we run seven divisions across Southern Ontario and up into North America. We're not a logistics platform. We're not a startup. We're truckers — and we've been at this since before most of our competition was born.</p>
+            <p>Privately held. Accountable to our customers. No shareholders, no excuses.</p>
+            <a href="#contact" class="btn btn--red">Work With Us</a>
+          </div>
+          <div class="about__right reveal-up" style="--delay:0.15s">
+            <div class="about__numbers">
+              <div class="about__num-item">
+                <span class="about__big">50<sup>+</sup></span>
+                <span class="about__desc">Years of operational excellence — longer than most competitors have existed</span>
+              </div>
+              <div class="about__num-item">
+                <span class="about__big">#1</span>
+                <span class="about__desc">Largest privately held trucking org in Southern Ontario</span>
+              </div>
+              <div class="about__num-item">
+                <span class="about__big">7</span>
+                <span class="about__desc">Operating divisions — bulk, tank, flatbed, van, warehousing, fleet, brokerage</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FLATBED VIDEO DIVIDER ===== -->
+    <div class="img-divider">
+      <video
+        class="img-divider__video"
+        autoplay muted loop playsinline
+        poster="assets/flatbed-truck.png"
+        aria-hidden="true"
+      >
+        <source src="assets/flatbed-truck-video.mp4" type="video/mp4" />
+      </video>
+      <div class="img-divider__overlay"></div>
+      <div class="img-divider__label">
+        <span class="img-divider__tag">// ONTARIO HIGHWAY</span>
+        <span class="img-divider__copy">Flatbed hauling steel — Hamilton to North Bay, 04:32</span>
+      </div>
+    </div>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="tag">What We Haul</span>
+          <h2 class="section-title">Three pillars.<br/>One standard.</h2>
+        </div>
+
+        <div class="services__grid">
+
+          <article class="scard reveal-up" style="--delay:0s">
+            <div class="scard__num">01</div>
+            <div class="scard__icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M3 24 L3 12 L12 7 L21 12 L30 7 L30 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <rect x="19" y="17" width="11" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                <circle cx="9" cy="25" r="2.5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="26" cy="25" r="2.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="scard__title">Trucking Services</h3>
+            <p class="scard__body">RIMS — 50+ years moving dry bulk, flatbed loads, tank product and van freight across Ontario and beyond. Safe. On time. Every time.</p>
+            <ul class="scard__tags">
+              <li>Dry Bulk</li>
+              <li>Flatbed</li>
+              <li>Tandem Flatbed</li>
+              <li>Tank</li>
+              <li>Van</li>
+            </ul>
+            <a href="#contact" class="scard__link">Get a Quote →</a>
+          </article>
+
+          <article class="scard scard--hot reveal-up" style="--delay:0.1s">
+            <div class="scard__num">02</div>
+            <div class="scard__icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="3" y="9" width="26" height="17" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M9 9 L9 5 L23 5 L23 9" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 16 L29 16" stroke="currentColor" stroke-width="2"/>
+                <rect x="18" y="20" width="8" height="5" rx="1" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="scard__title">Industrial &amp; Warehousing</h3>
+            <p class="scard__body">3D Warehousing handles your bins, storage and freight management. Full distribution support — your product stored, picked, shipped.</p>
+            <ul class="scard__tags">
+              <li>Bin Rentals</li>
+              <li>Warehousing</li>
+              <li>Freight Mgmt</li>
+              <li>Distribution</li>
+            </ul>
+            <a href="#contact" class="scard__link">Get a Quote →</a>
+          </article>
+
+          <article class="scard reveal-up" style="--delay:0.2s">
+            <div class="scard__num">03</div>
+            <div class="scard__icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 16 Q16 10 28 16 Q16 22 4 16Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M16 4 L16 28" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="scard__title">Transportation Solutions</h3>
+            <p class="scard__body">Thomas Solutions — cross-border expertise, LTL, JIT, brokerage and full supply chain management. Canada to the US, no drama.</p>
+            <ul class="scard__tags">
+              <li>Cross-Border</li>
+              <li>Import/Export</li>
+              <li>LTL</li>
+              <li>Brokerage</li>
+              <li>Supply Chain</li>
+            </ul>
+            <a href="#contact" class="scard__link">Get a Quote →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DIVISIONS ===== -->
+    <section class="divisions" id="divisions">
+      <div class="container">
+        <div class="divisions__header reveal-up">
+          <span class="tag">The Family of Companies</span>
+          <h2 class="section-title">Seven divisions.<br/>One name.</h2>
+        </div>
+        <div class="divisions__list reveal-up" style="--delay:0.1s">
+          <div class="div-row">
+            <span class="div-row__num">01</span>
+            <span class="div-row__name">RIMS Hamilton</span>
+            <span class="div-row__desc">Primary terminal — bulk, flatbed, tank, van operations out of Hamilton, ON</span>
+            <span class="div-row__tag">Core</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">02</span>
+            <span class="div-row__name">RIMS Windsor</span>
+            <span class="div-row__desc">Windsor gateway — cross-border US access, Ambassador Bridge corridor</span>
+            <span class="div-row__tag">Cross-Border</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">03</span>
+            <span class="div-row__name">RIMS Bulk</span>
+            <span class="div-row__desc">Leading dry bulk transporter in Southern Ontario — grain, aggregates, material</span>
+            <span class="div-row__tag">Bulk</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">04</span>
+            <span class="div-row__name">RIMS Tank</span>
+            <span class="div-row__desc">Liquid and dry bulk tank hauling — certified, compliant, reliable</span>
+            <span class="div-row__tag">Tank</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">05</span>
+            <span class="div-row__name">Fleet Services</span>
+            <span class="div-row__desc">In-house maintenance keeps every truck in the fleet rolling — no downtime</span>
+            <span class="div-row__tag">Operations</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">06</span>
+            <span class="div-row__name">IFS Trucking</span>
+            <span class="div-row__desc">Specialized freight solutions — industrial and oversized cargo</span>
+            <span class="div-row__tag">Specialized</span>
+          </div>
+          <div class="div-row">
+            <span class="div-row__num">07</span>
+            <span class="div-row__name">3D Warehousing</span>
+            <span class="div-row__desc">Full-service warehousing, bin rental and freight management — Hamilton, ON</span>
+            <span class="div-row__tag">Storage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHY TC ===== -->
+    <section class="why" id="network">
+      <div class="container">
+        <div class="why__grid">
+          <div class="why__left reveal-up">
+            <span class="tag">Why TransportCorp</span>
+            <h2 class="section-title">Reliable.<br/>Tough.<br/>Canadian.</h2>
+            <p>We're not a broker. We're not a tech play. We own the trucks, we run the routes, and we answer the phone — 24 hours a day, 7 days a week.</p>
+            <a href="#contact" class="btn btn--red">Start a Conversation</a>
+          </div>
+          <div class="why__features reveal-up" style="--delay:0.15s">
+            <div class="why__feat">
+              <div class="why__feat-n">50+</div>
+              <div class="why__feat-text">
+                <h4>Years of Heritage</h4>
+                <p>Three generations. One standard. Built on handshakes and delivered loads.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-n">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="var(--red)" stroke-width="2"/><path d="M14 8 L14 14 L18 17" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="why__feat-text">
+                <h4>24/7 Dispatch</h4>
+                <p>Real people answering real calls. Day, night, holidays — we're on.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-n">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="18" rx="2" stroke="var(--red)" stroke-width="2"/><path d="M3 12 L25 12" stroke="var(--red)" stroke-width="2"/><path d="M10 5 L10 12" stroke="var(--red)" stroke-width="2"/><path d="M18 5 L18 12" stroke="var(--red)" stroke-width="2"/></svg>
+              </div>
+              <div class="why__feat-text">
+                <h4>In-House Fleet</h4>
+                <p>We maintain our own trucks. No surprises, no outsourced breakdowns.</p>
+              </div>
+            </div>
+            <div class="why__feat">
+              <div class="why__feat-n">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3 C8.5 3 4 7.5 4 13 C4 20 14 25 14 25 S24 20 24 13 C24 7.5 19.5 3 14 3Z" stroke="var(--red)" stroke-width="2" fill="none"/><circle cx="14" cy="13" r="3.5" stroke="var(--red)" stroke-width="2"/></svg>
+              </div>
+              <div class="why__feat-text">
+                <h4>Cross-Border Ready</h4>
+                <p>Canada to US — customs, compliance, and clearance. We've crossed thousands of times.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact__grid">
+          <div class="contact__left reveal-up">
+            <span class="tag">Load Enquiries</span>
+            <h2 class="section-title">Ready to move<br/><span class="text-red">your freight?</span></h2>
+            <p>Tell us what, where, and when. We'll come back with a number. No fluff.</p>
+
+            <div class="contact__info">
+              <a href="tel:9055497800" class="contact__info-row">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 2 L6 2 L7.5 5.5 L5.5 7 C6.5 9.5 8.5 11.5 11 12.5 L12.5 10.5 L16 12 L16 15 C16 16.1 15.1 17 14 17 C7.4 17 2 11.6 2 5 C2 3.9 2.9 2 4 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                <span>905-549-7800</span>
+              </a>
+              <a href="mailto:info@transportcorp.com" class="contact__info-row">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5 L9 10 L16 5" stroke="currentColor" stroke-width="1.5"/></svg>
+                <span>info@transportcorp.com</span>
+              </a>
+              <div class="contact__info-row">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 2 C5.7 2 3 4.7 3 8 C3 12 9 16 9 16 S15 12 15 8 C15 4.7 12.3 2 9 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                <span>1818 Burlington St. East, Hamilton, ON</span>
+              </div>
+            </div>
+
+            <div class="contact__badge">
+              <span class="badge-dot"></span>
+              <span>Dispatch available <strong>24 / 7</strong></span>
+            </div>
+          </div>
+
+          <form class="contact__form reveal-up" style="--delay:0.15s" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-field">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Acme Corp" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="905-000-0000" />
+            </div>
+            <div class="form-field">
+              <label for="service">Service Type</label>
+              <select id="service" name="service">
+                <option value="">Select…</option>
+                <option>Bulk Trucking</option>
+                <option>Flatbed / Tandem</option>
+                <option>Tank Hauling</option>
+                <option>Van Services</option>
+                <option>Warehousing</option>
+                <option>Cross-Border / Import-Export</option>
+                <option>LTL / Cross-Docking</option>
+                <option>Brokerage / Supply Chain</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="message">Shipment Details</label>
+              <textarea id="message" name="message" rows="4" placeholder="Origin, destination, cargo type, frequency, weight…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--red btn--full">Send Load Enquiry →</button>
+            <div class="form-success" id="form-success" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="nav__logo">
+            <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+              <rect width="40" height="40" rx="3" fill="#C8102E"/>
+              <path d="M5 29 L5 16 L15 11 L25 16 L35 11 L35 29" stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+              <rect x="21" y="22" width="11" height="7" rx="1" fill="white"/>
+              <circle cx="12" cy="30" r="3" fill="white"/>
+              <circle cx="28" cy="30" r="3" fill="white"/>
+            </svg>
+            <span class="nav__wordmark">TRANSPORT<strong>CORP</strong></span>
+          </div>
+          <p>Southern Ontario's largest privately held trucking &amp; transportation company. Hamilton, ON since 1970.</p>
+          <div class="footer__social">
+            <a href="https://twitter.com/rimstransport" target="_blank" rel="noopener" aria-label="Twitter/X">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://instagram.com/rimstransport" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h5>Company</h5>
+            <a href="#about">Our History</a>
+            <a href="#about">Community</a>
+            <a href="#about">Sustainability</a>
+            <a href="#about">Health &amp; Safety</a>
+            <a href="#">Careers</a>
+          </div>
+          <div class="footer__col">
+            <h5>Divisions</h5>
+            <a href="#divisions">RIMS Hamilton</a>
+            <a href="#divisions">RIMS Windsor</a>
+            <a href="#divisions">RIMS Bulk</a>
+            <a href="#divisions">RIMS Tank</a>
+            <a href="#divisions">IFS Trucking</a>
+            <a href="#divisions">3D Warehousing</a>
+          </div>
+          <div class="footer__col">
+            <h5>Services</h5>
+            <a href="#services">Bulk Trucking</a>
+            <a href="#services">Flatbed</a>
+            <a href="#services">Tank</a>
+            <a href="#services">Van</a>
+            <a href="#services">Cross-Border</a>
+            <a href="#services">Warehousing</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2024 TransportCorp. All rights reserved. &nbsp;|&nbsp; 1818 Burlington St. E, Hamilton ON &nbsp;|&nbsp; <a href="tel:9055497800">905-549-7800</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
