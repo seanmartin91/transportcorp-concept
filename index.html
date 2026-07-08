@@ -3,129 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TransportCorp - Division Performance Dashboard</title>
+    <title>TransportCorp - Real-Time Operations Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #fff;
+            min-height: 100vh;
         }
+
         .header {
             background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            color: white;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 3rem;
+            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);
+            position: relative;
+            overflow: hidden;
         }
-        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .header p { opacity: 0.9; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        .kpi-grid {
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 L50 0 L100 50 L50 100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .truck-icon {
+            width: 50px;
+            height: 50px;
+            animation: truck-move 2s ease-in-out infinite;
+        }
+
+        @keyframes truck-move {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        .header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: -2rem auto 0;
+            padding: 0 2rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
+
         .kpi-card {
-            background: white;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .kpi-card:hover { transform: translateY(-4px); }
-        .kpi-card h3 { 
-            color: #666;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-        .kpi-card .value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #c41e3a;
-            margin-bottom: 0.5rem;
-        }
-        .kpi-card .change {
-            font-size: 0.9rem;
-            color: #28a745;
-        }
-        .kpi-card .change.negative { color: #dc3545; }
-        .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c41e3a, #ff4d6a);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(196, 30, 58, 0.4);
+            border-color: rgba(196, 30, 58, 0.5);
+        }
+
+        .kpi-card h3 {
+            color: #999;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .kpi-change {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .kpi-change.positive { color: #4ade80; }
+        .kpi-change.negative { color: #f87171; }
+
+        .chart-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        .table-container h2 {
+
+        .chart-card {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
             padding: 1.5rem;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
+
+        .chart-card h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .table-container {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .table-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .table-header p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e9ecef;
+
+        thead {
+            background: rgba(196, 30, 58, 0.1);
         }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
         th {
-            background: #f8f9fa;
+            color: #c41e3a;
             font-weight: 600;
-            color: #495057;
-            text-transform: uppercase;
             font-size: 0.85rem;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        tr:hover { background: #f8f9fa; }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.2s ease;
         }
-        .badge-success { background: #d4edda; color: #155724; }
-        .badge-warning { background: #fff3cd; color: #856404; }
-        .badge-danger { background: #f8d7da; color: #721c24; }
+
+        tbody tr:hover {
+            background: rgba(196, 30, 58, 0.05);
+        }
+
+        .badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-excellent {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+
+        .badge-good {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .badge-warning {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+        }
+
+        .agent-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-card {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        .agent-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .agent-status {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .chart-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🚛 TransportCorp Division Performance Dashboard</h1>
-        <p>Real-time logistics performance across 7 operating divisions</p>
+        <div class="header-content">
+            <h1>
+                <svg class="truck-icon" viewBox="0 0 64 64" fill="white">
+                    <path d="M48,28h-8V16H4v28h4c0,4.42,3.58,8,8,8s8-3.58,8-8h16c0,4.42,3.58,8,8,8s8-3.58,8-8h4V32L48,28z M16,48c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S18.21,48,16,48z M48,48c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S50.21,48,48,48z M48,32v-1.5l4,3V32H48z"/>
+                </svg>
+                TransportCorp Operations Center
+            </h1>
+            <p>Real-time logistics performance across 7 operating divisions</p>
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span>Live Data • Updated every 30 seconds</span>
+            </div>
+        </div>
     </div>
-    
+
     <div class="container">
-        <div class="kpi-grid">
+        <!-- KPI Dashboard -->
+        <div class="dashboard-grid">
             <div class="kpi-card">
                 <h3>Total Revenue</h3>
-                <div class="value">$2.4M</div>
-                <div class="change">↑ 12.3% vs last month</div>
+                <div class="kpi-value">$2.4M</div>
+                <div class="kpi-change positive">↑ 12.3% vs last month</div>
             </div>
             <div class="kpi-card">
                 <h3>Gross Margin</h3>
-                <div class="value">24.5%</div>
-                <div class="change">↑ 1.2pp vs last month</div>
+                <div class="kpi-value">24.5%</div>
+                <div class="kpi-change positive">↑ 1.2pp vs last month</div>
             </div>
             <div class="kpi-card">
                 <h3>On-Time Delivery</h3>
-                <div class="value">94.2%</div>
-                <div class="change negative">↓ 0.8pp vs last month</div>
+                <div class="kpi-value">94.2%</div>
+                <div class="kpi-change negative">↓ 0.8pp vs last month</div>
             </div>
             <div class="kpi-card">
                 <h3>Fleet Utilization</h3>
-                <div class="value">87.3%</div>
-                <div class="change">↑ 3.1pp vs last month</div>
+                <div class="kpi-value">87.3%</div>
+                <div class="kpi-change positive">↑ 3.1pp vs last month</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Active Loads</h3>
+                <div class="kpi-value">1,247</div>
+                <div class="kpi-change positive">↑ 156 today</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Fuel Efficiency</h3>
+                <div class="kpi-value">7.2 MPG</div>
+                <div class="kpi-change positive">↑ 0.3 vs last week</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Average Speed</h3>
+                <div class="kpi-value">58 km/h</div>
+                <div class="kpi-change positive">↑ 2 km/h optimal</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Driver Satisfaction</h3>
+                <div class="kpi-value">4.7/5</div>
+                <div class="kpi-change positive">↑ 0.2 this quarter</div>
             </div>
         </div>
 
+        <!-- Agent Status Section -->
+        <div class="agent-section">
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Route Optimizer</h4>
+                <p>Analyzing 247 routes • Saved 3.2 hrs today</p>
+            </div>
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Fuel Price Monitor</h4>
+                <p>$1.42/L avg • Best: Esso Hamilton</p>
+            </div>
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Weather Tracker</h4>
+                <p>Hamilton 18°C • Clear • No delays</p>
+            </div>
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Maintenance Alert</h4>
+                <p>12 vehicles due • 3 scheduled today</p>
+            </div>
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Customer Portal</h4>
+                <p>89 active shipments • 23 deliveries today</p>
+            </div>
+            <div class="agent-card">
+                <h4><span class="agent-status"></span> Driver Status</h4>
+                <p>142 active • 18 approaching HOS limit</p>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="chart-section">
+            <div class="chart-card">
+                <h3>Revenue Trend (Last 7 Days)</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Division Mix</h3>
+                <canvas id="divisionChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Division Performance Table -->
         <div class="table-container">
-            <h2>Division Comparison - June 2026</h2>
+            <div class="table-header">
+                <h3>Division Performance Comparison</h3>
+                <p>Current month-to-date metrics across all operating divisions</p>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -146,7 +429,7 @@
                         <td>342</td>
                         <td>96.1%</td>
                         <td>12.4%</td>
-                        <td><span class="badge badge-success">Excellent</span></td>
+                        <td><span class="badge badge-excellent">Excellent</span></td>
                     </tr>
                     <tr>
                         <td><strong>RIMS Windsor</strong></td>
@@ -155,7 +438,7 @@
                         <td>298</td>
                         <td>93.5%</td>
                         <td>15.2%</td>
-                        <td><span class="badge badge-warning">Good</span></td>
+                        <td><span class="badge badge-good">Good</span></td>
                     </tr>
                     <tr>
                         <td><strong>RIMS Bulk</strong></td>
@@ -164,7 +447,7 @@
                         <td>187</td>
                         <td>91.8%</td>
                         <td>18.7%</td>
-                        <td><span class="badge badge-warning">Good</span></td>
+                        <td><span class="badge badge-good">Good</span></td>
                     </tr>
                     <tr>
                         <td><strong>RIMS Tank</strong></td>
@@ -173,7 +456,7 @@
                         <td>156</td>
                         <td>95.2%</td>
                         <td>14.1%</td>
-                        <td><span class="badge badge-success">Excellent</span></td>
+                        <td><span class="badge badge-excellent">Excellent</span></td>
                     </tr>
                     <tr>
                         <td><strong>Fleet Services</strong></td>
@@ -182,7 +465,7 @@
                         <td>N/A</td>
                         <td>N/A</td>
                         <td>N/A</td>
-                        <td><span class="badge badge-success">Excellent</span></td>
+                        <td><span class="badge badge-excellent">Excellent</span></td>
                     </tr>
                     <tr>
                         <td><strong>IFS Trucking</strong></td>
@@ -191,7 +474,7 @@
                         <td>214</td>
                         <td>92.3%</td>
                         <td>16.8%</td>
-                        <td><span class="badge badge-warning">Good</span></td>
+                        <td><span class="badge badge-good">Good</span></td>
                     </tr>
                     <tr>
                         <td><strong>3D Warehousing</strong></td>
@@ -200,11 +483,88 @@
                         <td>N/A</td>
                         <td>98.7%</td>
                         <td>N/A</td>
-                        <td><span class="badge badge-success">Excellent</span></td>
+                        <td><span class="badge badge-excellent">Excellent</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+        // Revenue Trend Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Daily Revenue ($K)',
+                    data: [312, 345, 328, 367, 351, 289, 342],
+                    borderColor: '#c41e3a',
+                    backgroundColor: 'rgba(196, 30, 58, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#999' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#999' }
+                    }
+                }
+            }
+        });
+
+        // Division Mix Chart
+        const divisionCtx = document.getElementById('divisionChart').getContext('2d');
+        new Chart(divisionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['RIMS Hamilton', 'RIMS Windsor', 'RIMS Bulk', 'RIMS Tank', 'Fleet Services', 'IFS Trucking', '3D Warehousing'],
+                datasets: [{
+                    data: [524, 488, 413, 389, 157, 278, 199],
+                    backgroundColor: [
+                        '#c41e3a',
+                        '#e63946',
+                        '#f77f00',
+                        '#06d6a0',
+                        '#118ab2',
+                        '#073b4c',
+                        '#ef476f'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#999', font: { size: 10 } }
+                    }
+                }
+            }
+        });
+
+        // Auto-refresh simulation
+        setInterval(() => {
+            const liveDot = document.querySelector('.live-dot');
+            liveDot.style.background = '#fbbf24';
+            setTimeout(() => {
+                liveDot.style.background = '#4ade80';
+            }, 200);
+        }, 30000);
+    </script>
 </body>
 </html>
